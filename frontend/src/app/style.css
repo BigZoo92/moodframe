@@ -148,9 +148,11 @@ body {
   margin: 0;
   display: flex;
   align-items: center;
-  background: #fff;
+  background: #fff8ef;
   flex-direction: column;
   font-family: "Inter", sans-serif;
+  background: #fff8ef;
+  color: #b98fe6;
 }
 
 /*# sourceMappingURL=style.css.map */
