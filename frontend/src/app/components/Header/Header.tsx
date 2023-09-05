@@ -1,22 +1,28 @@
 import React from 'react';
 import "./style.scss";
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import Logo from '../Logo/Logo';
 
 const Header = () => {
   return (
     <header>
         <nav>
+            <Logo></Logo>
             <ul>
                 <li>
                     <Link href='/'>Home</Link>
                 </li>
                 <li>
-                    <Link href='/about'>About Us</Link>
+                    <Link href='/templates'>Templates</Link>
                 </li>
                 <li>
-                    <Link href='/blog/hello-world'>Blog Post</Link>
+                    <Link href='/showcase'>Showcase</Link>
+                </li>
+                <li>
+                    <Link href='/gallery'>Gallery</Link>
                 </li>
             </ul>
+            <Link href='/blog/hello-world'>login</Link>
         </nav>
     </header>
   );
