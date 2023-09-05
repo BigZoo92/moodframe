@@ -1,9 +1,8 @@
 @import '../../sass/variables';
-
 header {
-  width: 90vw;
-  height: 75px;
-  margin-top: calc($marge * 2) !important;
+  width: $width;
+  height: $height-header-footer;
+  margin-top: calc($marge / 4) !important;
   border-bottom: 1px solid $color-purple !important;
   nav {
     width: 100%;

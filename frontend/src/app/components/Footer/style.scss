@@ -1,0 +1,10 @@
+@import '../../sass/variables';
+
+footer {
+  display: flex !important;
+  height: $height-header-footer;
+  width: $width;
+  border-top: 1px solid $color-purple !important;
+  padding-top: calc($marge / 4) !important;
+  box-sizing: content-box;
+}

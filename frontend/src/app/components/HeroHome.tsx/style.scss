@@ -1,0 +1,14 @@
+@import '../../sass/variables';
+
+.hero_home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  h2 {
+    position: absolute;
+    font-family: $font-title;
+    font-size: 8rem;
+    font-weight: 100;
+  }
+}

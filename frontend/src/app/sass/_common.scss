@@ -23,7 +23,7 @@ body {
 
 main {
   width: 90vw;
-  height: calc(100vh - 100px);
+  height: $height-main;
   display: flex;
   justify-content: center;
   align-items: center;
