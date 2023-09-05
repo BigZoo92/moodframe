@@ -5,4 +5,8 @@ $color-white: #fff8ef;
 $color-black: #221e1b;
 
 // FONTS
-$font-common: 'Inter', sans-serif;
+$font-common: 'JetBrains Mono', monospace;
+$font-title: 'Plantasia Calacarn', sans-serif;
+
+// MARGES
+$marge: clamp(5px, calc(1vw + 0.35rem), 35px);

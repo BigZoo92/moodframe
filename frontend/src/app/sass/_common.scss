@@ -6,6 +6,7 @@ html,
 body {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  min-height: 100dvh;
 }
 
 body {
@@ -17,4 +18,14 @@ body {
   font-family: $font-common;
   background: $color-white;
   color: $color-purple;
+  font-size: clamp(15px, 0.75vw, 18px);
+}
+
+main {
+  width: 90vw;
+  height: calc(100vh - 100px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
