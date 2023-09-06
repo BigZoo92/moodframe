@@ -1,0 +1,28 @@
+@import '../../sass/variables';
+
+.roundText {
+  width: 100%;
+  aspect-ratio: 1/1;
+  position: absolute;
+  animation: rotateText linear infinite 10s;
+  text {
+    font-size: 33px;
+    font-family: $font-common;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    fill: #333;
+    .word:nth-child(odd) {
+      fill: $color-mint;
+    }
+  }
+}
+
+@keyframes rotateText {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

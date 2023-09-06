@@ -3,10 +3,18 @@ $color-purple: #b98fe6;
 $color-mint: #85e6c5;
 $color-white: #fff8ef;
 $color-black: #221e1b;
+$color-orange: #ff9a8c;
 
 // FONTS
 $font-common: 'JetBrains Mono', monospace;
-$font-title: 'Plantasia Calacarn', sans-serif;
+$font-logo: 'Plantasia Calacarn', sans-serif;
+$font-title: 'Micronian 3D', sans-serif;
+$font-pixel: '0xA000-Pixelated', sans-serif;
 
-// MARGES
+// MARGES AND SIZES
 $marge: clamp(5px, calc(1vw + 0.35rem), 35px);
+$width: clamp(350px, 90vw, 2000px);
+$height-header-footer: 75px;
+$height-main: calc(
+  99dvh - calc(calc(calc($marge / 2) + calc($height-header-footer * 2)))
+);
