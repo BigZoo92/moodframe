@@ -2,13 +2,88 @@
 
 .hero_home {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-start;
   position: relative;
-  h2 {
-    position: absolute;
-    font-family: $font-title;
-    font-size: 8rem;
-    font-weight: 100;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  .container_top_home {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    h2 {
+      font-family: $font-title;
+      font-size: clamp(3rem, 10vw, 15rem);
+      font-weight: 100;
+      width: 50%;
+      i {
+        color: $color-mint;
+      }
+    }
+    .container_prices {
+      width: calc(50% - $marge);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      flex-direction: column;
+      gap: $marge;
+      margin-top: $marge;
+      margin-right: $marge;
+      .container_offer {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: $marge;
+        span {
+          background-color: #b98fe647;
+          border-radius: 25px;
+          padding: 10%;
+          font-size: clamp(2rem, 6vw, 8rem);
+          font-family: $font-common;
+          font-weight: 900;
+          display: inline-block;
+          transform: skewX(-15deg);
+          margin-bottom: calc($marge / 2);
+        }
+      }
+      p {
+        font-weight: 900;
+        font-size: clamp(0.75rem, 1.75vw, 1.75rem);
+        i {
+          color: $color-mint;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+  .container_bottom_home {
+    display: flex;
+    width: 100%;
+    align-items: flex-end;
+    justify-content: flex-end;
+    .container_button {
+      display: flex;
+      width: clamp(150px, 35%, 475px);
+      justify-content: center;
+      align-items: center;
+      gap: $marge;
+      position: absolute;
+      left: 50%;
+      bottom: $marge;
+      transform: translateX(-50%);
+    }
+    .container_eyes {
+      position: absolute;
+      cursor: pointer;
+      bottom: $marge;
+      right: 0;
+      width: clamp(150px, 25%, 200px);
+      aspect-ratio: 1/1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }

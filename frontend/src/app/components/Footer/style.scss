@@ -2,9 +2,38 @@
 
 footer {
   display: flex !important;
+  justify-content: center;
+  align-items: center;
   height: $height-header-footer;
   width: $width;
   border-top: 1px solid $color-purple !important;
   padding-top: calc($marge / 4) !important;
   box-sizing: content-box;
+  text-align: center;
+  nav {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    width: 100%;
+    li {
+      &:nth-child(odd) {
+        a {
+          color: $color-purple;
+        }
+      }
+      &:nth-child(even) {
+        a {
+          color: $color-mint;
+        }
+      }
+    }
+  }
 }

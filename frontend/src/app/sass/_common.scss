@@ -22,10 +22,20 @@ body {
 }
 
 main {
-  width: 90vw;
+  width: $width;
   height: $height-main;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+::-moz-selection {
+  color: $color-orange !important;
+  background: transparent !important;
+}
+
+::selection {
+  color: $color-orange !important;
+  background: transparent !important;
 }
