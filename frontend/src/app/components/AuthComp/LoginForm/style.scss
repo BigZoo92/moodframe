@@ -1,0 +1,79 @@
+@import '../../../sass/variables';
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    &:nth-of-type(3) {
+      flex-direction: row;
+    }
+    span {
+      padding-block: calc($marge / 2);
+      color: red;
+      text-transform: uppercase;
+    }
+    button {
+      border-radius: none;
+      border: none;
+      font-family: $font-common;
+      padding-block: calc($marge / 1);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: all ease 0.3s;
+      &:nth-of-type(1) {
+        width: 60%;
+        background-color: $color-mint;
+        color: $color-black;
+        &:hover {
+          color: $color-white;
+        }
+      }
+      &:nth-of-type(2) {
+        width: 40%;
+        color: $color-black;
+        &:hover {
+          color: $color-purple;
+        }
+      }
+    }
+    label {
+      text-transform: uppercase;
+      color: $color-black;
+      font-size: 1.5rem;
+    }
+    input {
+      font-size: 1rem;
+      font-family: $font-common;
+      padding: $marge;
+      width: 100%;
+      outline: 1px solid $color-purple;
+
+      border: none;
+      background-color: $color-white;
+      color: $color-purple;
+      &:active,
+      &:focus {
+        outline: none;
+        outline: 2px solid $color-mint;
+        z-index: 2;
+      }
+      &::placeholder {
+        text-transform: uppercase;
+      }
+      &::-moz-placeholder,
+      &::-webkit-input-placeholder {
+        text-transform: uppercase;
+      }
+    }
+  }
+  span {
+    padding-top: $marge;
+    color: red;
+    text-transform: uppercase;
+  }
+}

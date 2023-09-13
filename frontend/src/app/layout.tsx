@@ -1,5 +1,6 @@
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
+import { FrontProvider } from './contexts/providers/FrontProvider'
 import './style.css'
 import type { Metadata } from 'next'
 
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Header></Header>
-          {children}
-        <Footer></Footer>
+        <FrontProvider>
+          <Header></Header>
+            {children}
+          <Footer></Footer>
+        </FrontProvider>
       </body>
     </html>
   )

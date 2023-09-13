@@ -3,8 +3,10 @@ import './style.scss';
 import Button from '../Button/Button';
 import Eyes from '../Eyes/Eyes';
 import CircularText from '../CircularText/CircularText';
+import AuthComp from '../AuthComp/AuthComp';
 
 const HeroHome = () => {
+    
     return (
         <section className='hero_home'>
             <div className='container_top_home'>
@@ -32,8 +34,10 @@ const HeroHome = () => {
                     <Eyes></Eyes>
                     <CircularText></CircularText>
                 </a>
-            </div>    
+            </div>   
+            <AuthComp></AuthComp> 
         </section>
+        
     );
 };
 

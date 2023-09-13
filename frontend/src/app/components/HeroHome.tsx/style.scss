@@ -37,7 +37,7 @@
         justify-content: space-between;
         gap: $marge;
         span {
-          background-color: #b98fe647;
+          background-color: $color-purple-transparent;
           border-radius: 25px;
           padding: 10%;
           font-size: clamp(2rem, 6vw, 8rem);

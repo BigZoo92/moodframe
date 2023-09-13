@@ -35,8 +35,6 @@ const dotStyle = (size: number): React.CSSProperties => {
 const calculateDotSize = (x: number, y: number): number => {
   const minDiameterBlack = 15;
   const maxDiameterBlack = 30;
-  const minDiameterBlue = 10;
-  const maxDiameterBlue = 17;
 
   const i = Math.abs((x + y) / 2);
   const xmax = window.innerWidth / 40;
@@ -46,8 +44,6 @@ const calculateDotSize = (x: number, y: number): number => {
 
   const diameterBlack =
     (ipercent * (minDiameterBlack - maxDiameterBlack)) / 100 + maxDiameterBlack;
-  const diameterBlue =
-    (ipercent * (maxDiameterBlue - minDiameterBlue)) / 100 + minDiameterBlue;
 
   return diameterBlack;
 };
