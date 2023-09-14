@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useMutation, gql } from '@apollo/client';
 import './style.scss';
 
 interface AuthFormData {
@@ -9,7 +10,24 @@ interface AuthFormData {
   confirmPassword: string;
 }
 
+const REGISTER_USER = gql`
+  mutation RegisterUser(
+    $username: String!
+    $email: String!
+    $password: String!
+  ) {
+    registerUser(username: $username, email: $email, password: $password) {
+      user_id
+      username
+      email
+    }
+  }
+`;
+
+
 const SignForm = () => {
+  const [registerUser] = useMutation(REGISTER_USER);
+
   const {
     register,
     handleSubmit,
@@ -17,9 +35,37 @@ const SignForm = () => {
     watch, 
   } = useForm<AuthFormData>();
 
-  const onSubmit: SubmitHandler<AuthFormData> = (data) => {
-    console.log(data);
-  };
+const onSubmit = async (data: any) => {
+  console.log('hello world');
+
+  try {
+    const response = await registerUser({
+      variables: {
+        username: data.username,
+        email: data.email,
+        password: data.password,
+      },
+    });
+
+    console.log('Mutation exécutée avec succès'); // Ajoutez cette ligne
+
+    if (response.data && response.data.registerUser) {
+      // La mutation a réussi, vous pouvez prendre des mesures ici
+      console.log(
+        'Utilisateur inscrit avec succès:',
+        response.data.registerUser
+      );
+    } else {
+      // La mutation a échoué
+      console.error("L'inscription a échoué:", response.errors);
+    }
+  } catch (error) {
+    console.error("Erreur lors de l'inscription:", error);
+  }
+};
+
+
+
 
   const confirmPassword = watch('confirmPassword', '');
 
@@ -38,9 +84,10 @@ const SignForm = () => {
         <input
           type='email'
           id='email'
-          {...register('email')}
+          {...register('email', { required: 'Email is required' })}
           placeholder='Email'
         />
+        {errors.email && <span>{errors.email.message}</span>}
       </div>
       <div>
         <input
@@ -65,7 +112,7 @@ const SignForm = () => {
         {errors.confirmPassword && <span>{errors.confirmPassword.message}</span>}
       </div>
       <div className='button_form_switch'>
-        <button type='submit'>Sign In</button>
+        <input type='submit' value="login"/>
         <button>Forgot ?</button>
       </div>
     </form>
