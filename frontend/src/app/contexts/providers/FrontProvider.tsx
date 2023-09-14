@@ -8,10 +8,11 @@ interface FrontProviderProps {
 }
 
 export function FrontProvider({ children }: FrontProviderProps) {
-  const [isLoginActive, setIsLoginActive] = useState<boolean>(false);
+  const [isAuthActive, setIsAuthActive] = useState<boolean>(false);
+  const [isLoginActive, setIsLoginActive] = useState<boolean>(true);
 
   return (
-    <FrontContext.Provider value={{ isLoginActive, setIsLoginActive }}>
+    <FrontContext.Provider value={{ isLoginActive, isAuthActive, setIsLoginActive, setIsAuthActive }}>
       {children}
     </FrontContext.Provider>
   );

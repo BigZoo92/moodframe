@@ -9,7 +9,7 @@ form {
     width: 100%;
     display: flex;
     flex-direction: column;
-    &:nth-of-type(3) {
+    &.button_form_switch {
       flex-direction: row;
     }
     span {
@@ -70,10 +70,5 @@ form {
         text-transform: uppercase;
       }
     }
-  }
-  span {
-    padding-top: $marge;
-    color: red;
-    text-transform: uppercase;
   }
 }

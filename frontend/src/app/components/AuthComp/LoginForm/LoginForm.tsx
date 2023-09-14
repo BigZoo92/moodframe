@@ -38,7 +38,7 @@ const onSubmit: SubmitHandler<AuthFormData> = (data) => {
         />
         {errors.password && <span>{errors.password.message}</span>}
       </div>
-      <div>
+      <div className='button_form_switch'>
         <button type='submit'>Log In</button>
         <button>Forgot ?</button>
       </div>

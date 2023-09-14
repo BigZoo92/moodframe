@@ -3,6 +3,8 @@
 import React, { createContext, useContext } from 'react';
 
 interface FrontContextType {
+  isAuthActive: boolean;
+  setIsAuthActive: React.Dispatch<React.SetStateAction<boolean>>;
   isLoginActive: boolean;
   setIsLoginActive: React.Dispatch<React.SetStateAction<boolean>>;
 }
