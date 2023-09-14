@@ -1,7 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, { useState } from 'react';
 import'./style.scss'
 import Link from 'next/link';
 import Logo from '../Logo/Logo';
+import LoginButton from './LoginButton/LoginButton';
 
 const Header = () => {
   return (
@@ -22,7 +25,7 @@ const Header = () => {
                     <Link href='/gallery'>Gallery</Link>
                 </li>
             </ul>
-            <Link href='/blog/hello-world'>login</Link>
+            <LoginButton></LoginButton>
         </nav>
     </header>
   );

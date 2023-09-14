@@ -1,0 +1,45 @@
+@import '../../sass/variables';
+
+.container_form {
+  width: calc(600px - $marge);
+  border: 3px solid $color-purple;
+  background-color: $color-purple-transparent;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: all ease 0.3s;
+  padding: $marge;
+  box-sizing: content-box;
+  gap: $marge;
+  display: flex;
+  flex-direction: column;
+  .changeForm {
+    text-transform: uppercase;
+    font-size: 1.25rem;
+    color: $color-mint;
+    button {
+      border: none;
+      background: none;
+      border-bottom: 1px solid $color-mint;
+      cursor: pointer;
+      font-size: 1.75rem;
+      transition: all ease 0.3s;
+      &:hover {
+        color: red;
+      }
+    }
+  }
+  h3 {
+    text-transform: uppercase;
+    font-size: 4rem;
+    width: 100%;
+    i {
+      text-transform: none;
+      font-family: $font-logo;
+      b {
+        color: $color-mint;
+      }
+    }
+  }
+}

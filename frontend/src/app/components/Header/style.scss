@@ -11,7 +11,13 @@ header {
     align-items: flex-end;
     height: 100%;
     padding-inline: $marge;
-    a {
+    a,
+    button {
+      background-color: transparent;
+      font-family: $font-common;
+      cursor: pointer;
+      border: none;
+      outline: none;
       text-transform: uppercase;
       font-weight: 400;
       transform: translateY(50%);
