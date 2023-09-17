@@ -10,7 +10,7 @@ const HeroHome = () => {
     return (
         <section className='hero_home'>
             <div className='container_top_home'>
-            <h2>design <i>your</i> story</h2>
+                <h2>design <i>your</i> story</h2>
                 <div className='container_prices'>
                     <div className='container_offer'>
                         <div>
@@ -22,7 +22,7 @@ const HeroHome = () => {
                             <label htmlFor='advanced plan'>Advanced plan</label>
                         </div>
                     </div>
-                    <p>You're <i>student</i> ? It's <i>only 1$</i> !</p>
+                    <p>You&apos;re <i>student</i> ? It&apos;s <i>only 1$</i> !</p>
                 </div>
             </div>
             <div className='container_bottom_home'>
@@ -37,7 +37,6 @@ const HeroHome = () => {
             </div>   
             <AuthComp></AuthComp> 
         </section>
-        
     );
 };
 

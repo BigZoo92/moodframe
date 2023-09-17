@@ -8,7 +8,9 @@ import SignForm from './LoginForm/SignForm';
 
 const AuthComp = () => {
 
-  const { isAuthActive, setIsAuthActive, isLoginActive, setIsLoginActive  } = useFrontContext();
+  const { isAuthActive, setIsAuthActive, isLoginActive, setIsLoginActive, isUserExists, setIsUserExists  } = useFrontContext();
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const styleContainer: CSSProperties = {
     opacity: isAuthActive ? 1 : 0,
@@ -19,11 +21,6 @@ const AuthComp = () => {
   event.stopPropagation();
   setIsLoginActive(state);
 };
-
-
-
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -43,6 +40,13 @@ const AuthComp = () => {
       window.removeEventListener('click', handleClickOutside);
     };
   }, [isAuthActive, setIsAuthActive]);
+
+  useEffect(() => {
+    if(isUserExists){      
+      setIsLoginActive(true)
+      setIsUserExists(false)
+    }
+  }, [setIsLoginActive, setIsUserExists, isUserExists]);
 
   return (
     <section ref={containerRef} className='container_form' style={styleContainer}>

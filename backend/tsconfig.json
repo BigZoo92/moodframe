@@ -1,0 +1,23 @@
+// tsconfig.graphql.json
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "jsx": "react",
+    "lib": ["ESNext", "DOM"],
+    "typeRoots": ["./node_modules/@types"],
+    "types": ["node"]
+  },
+  "include": ["./graphql/schema.ts"], // Spécifiez le chemin complet de schema.ts
+  "exclude": ["node_modules"]
+}

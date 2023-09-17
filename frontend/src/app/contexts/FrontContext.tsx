@@ -7,6 +7,10 @@ interface FrontContextType {
   setIsAuthActive: React.Dispatch<React.SetStateAction<boolean>>;
   isLoginActive: boolean;
   setIsLoginActive: React.Dispatch<React.SetStateAction<boolean>>;
+  isUserExists: boolean;
+  setIsUserExists: React.Dispatch<React.SetStateAction<boolean>>;
+  userName: string;
+  setUserName: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export const FrontContext = createContext<FrontContextType | undefined>(undefined);
