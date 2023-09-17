@@ -1,7 +1,7 @@
 // tsconfig.graphql.json
 {
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "module": "CommonJS",
     "outDir": "./dist",
     "strict": true,
@@ -10,6 +10,7 @@
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
     "allowSyntheticDefaultImports": true,
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": false,
     "jsx": "react",

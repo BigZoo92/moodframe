@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './style.scss';
+import { useFrontContext } from '@/app/contexts/FrontContext';
 
 interface AuthFormData {
   usernameOrEmail: string;
@@ -8,6 +9,9 @@ interface AuthFormData {
 }
 
 const LoginForm = () => {
+
+  const { userName  } = useFrontContext();
+
   const {
   register,
   handleSubmit,
@@ -26,6 +30,7 @@ const onSubmit: SubmitHandler<AuthFormData> = (data) => {
           id='usernameOrEmail'
           {...register('usernameOrEmail', { required: 'Username or email is required' })}
           placeholder = 'Username or Email'
+          value={userName}
         />
         {errors.usernameOrEmail && <span>{errors.usernameOrEmail.message}</span>}
       </div>

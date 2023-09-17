@@ -1,7 +1,9 @@
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import { useMutation, gql } from '@apollo/client';
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+// import { useRouter } from 'next/router';
+import { useMutation, gql, useApolloClient } from '@apollo/client';
 import './style.scss';
+import { useFrontContext } from '@/app/contexts/FrontContext';
 
 interface AuthFormData {
   username: string;
@@ -24,9 +26,20 @@ const REGISTER_USER = gql`
   }
 `;
 
+const CHECK_USER_EXIST = gql`
+  query CheckUserExist($username: String, $email: String) {
+    checkUserExists(username: $username, email: $email)
+  }
+`;
+
+
 
 const SignForm = () => {
   const [registerUser] = useMutation(REGISTER_USER);
+  const { setIsUserExists, setUserName  } = useFrontContext();
+  const client = useApolloClient(); // Utilisez useApolloClient pour obtenir le client Apollo
+  // const router = useRouter(); // Récupérez l'objet de routage
+
 
   const {
     register,
@@ -36,25 +49,33 @@ const SignForm = () => {
   } = useForm<AuthFormData>();
 
 const onSubmit = async (data: any) => {
-  console.log('hello world');
+  const { username, email, password } = data;
+
+  const checkUserResponse = await client.query({
+  query: CHECK_USER_EXIST,
+  variables: { username, email },
+});
+
+if (checkUserResponse.data.checkUserExists) {
+    // L'utilisateur existe déjà, vous pouvez afficher un message d'erreur ou prendre d'autres mesures.
+    alert('WEEEESH T DEJA INSCRIT PELO')
+    setUserName(username)
+    setIsUserExists(true);
+    return;
+  }
+
 
   try {
     const response = await registerUser({
       variables: {
-        username: data.username,
-        email: data.email,
-        password: data.password,
+        username: username,
+        email: email,
+        password: password,
       },
     });
 
-    console.log('Mutation exécutée avec succès'); // Ajoutez cette ligne
-
     if (response.data && response.data.registerUser) {
-      // La mutation a réussi, vous pouvez prendre des mesures ici
-      console.log(
-        'Utilisateur inscrit avec succès:',
-        response.data.registerUser
-      );
+      // router.push('/dashboard');
     } else {
       // La mutation a échoué
       console.error("L'inscription a échoué:", response.errors);

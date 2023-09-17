@@ -4,9 +4,10 @@ import {
   GraphQLString,
   GraphQLNonNull,
   GraphQLInt,
+  GraphQLBoolean,
 } from 'graphql';
 import { db } from '../dbconfig'; // Assurez-vous que le chemin vers votre fichier de configuration de base de données est correct.
-import { hashPassword } from '../utils/passwordUtils';
+import { hashPassword, searchUserByUsernameOrEmail } from '../utils';
 
 // 1. Définissez un type GraphQL pour votre utilisateur.
 const UserType = new GraphQLObjectType({
@@ -22,16 +23,31 @@ const UserType = new GraphQLObjectType({
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
-    // Exemple de requête pour obtenir un utilisateur par ID.
-    // Vous pouvez ajouter d'autres requêtes ici si nécessaire.
-    user: {
-      type: UserType,
-      args: { user_id: { type: GraphQLInt } }, // L'argument user_id est attendu
-      resolve(parent, args) {
-        // Ici, vous pouvez écrire la logique pour récupérer un utilisateur par ID depuis votre base de données.
-        // Par exemple, si vous avez une fonction getUserById dans votre backend,
-        // vous pouvez l'appeler ici et renvoyer l'utilisateur correspondant.
-        // return getUserById(args.user_id);
+    checkUserExists: {
+      type: GraphQLBoolean,
+      args: {
+        username: { type: GraphQLString },
+        email: { type: GraphQLString },
+      },
+      async resolve(parent, args) {
+        try {
+          const existingUser = await searchUserByUsernameOrEmail(
+            args.username,
+            args.email
+          );
+          if (existingUser) {
+            return true;
+          } else {
+            return false;
+          }
+        } catch (error) {
+          // Gérez les erreurs ici si la recherche échoue.
+          console.error(
+            "Erreur lors de la recherche d'utilisateur existant :",
+            error
+          );
+          throw error;
+        }
       },
     },
   },
