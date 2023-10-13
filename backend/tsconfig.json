@@ -18,6 +18,6 @@
     "typeRoots": ["./node_modules/@types"],
     "types": ["node"]
   },
-  "include": ["./graphql/schema.ts"], // Spécifiez le chemin complet de schema.ts
+  "include": ["./src/graphql/schema.ts"], // Spécifiez le chemin complet de schema.ts
   "exclude": ["node_modules"]
 }
