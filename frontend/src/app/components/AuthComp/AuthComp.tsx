@@ -2,13 +2,13 @@
 
 import React, { CSSProperties, useEffect, useRef } from 'react';
 import './style.scss';
-import { useFrontContext } from '@/app/contexts/FrontContext';
+import { useStore } from '@/app/store';
 import LoginForm from './LoginForm/LoginForm';
 import SignForm from './LoginForm/SignForm';
 
 const AuthComp = () => {
 
-  const { isAuthActive, setIsAuthActive, isLoginActive, setIsLoginActive, isUserExists, setIsUserExists  } = useFrontContext();
+  const { isAuthActive, setIsAuthActive, isLoginActive, setIsLoginActive, isUserExists, setIsUserExists  } = useStore();
 
   const containerRef = useRef<HTMLDivElement | null>(null);
 

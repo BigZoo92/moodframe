@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import './style.scss';
-import { useFrontContext } from '@/app/contexts/FrontContext';
+import { useStore } from '@/app/store';
 
 interface AuthFormData {
   usernameOrEmail: string;
@@ -10,7 +10,7 @@ interface AuthFormData {
 
 const LoginForm = () => {
 
-  const { userName  } = useFrontContext();
+  const { userName  } = useStore();
 
   const {
   register,

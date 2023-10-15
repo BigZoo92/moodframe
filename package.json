@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/BigZoo92/moodframe/issues"
   },
-  "homepage": "https://github.com/BigZoo92/moodframe#readme"
+  "homepage": "https://github.com/BigZoo92/moodframe#readme",
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
 }

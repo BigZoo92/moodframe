@@ -1,6 +1,4 @@
-import { CorsOptions } from 'cors';
-import schema from './graphql';
-import { ApolloServer } from 'apollo-server-express';
+import { CorsOptions } from 'cors';7
 
 // WHITELIST
 export const whitelist = ['http://localhost:3000'];
@@ -18,8 +16,3 @@ export const corsOptions: CorsOptions = {
 };
 
 export const port = process.env.PORT || 4000;
-// APPOLLO CONFIG
-export const server = new ApolloServer({
-  schema,
-  context: ({ req, res }) => ({ req, res }),
-});

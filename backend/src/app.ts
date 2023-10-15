@@ -1,8 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { signup, startServer } from './utils';
-import { corsOptions, port, server } from './constant';
+import { signup } from './utils';
+import { corsOptions, port } from './constant';
 
 // INIT
 dotenv.config();
@@ -20,4 +20,6 @@ app.get('/', (_, res) => {
 app.post('/api/auth/signup', (req, res) => signup(req, res));
 
 // START THE SERVER
-startServer(app, port, server);
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });

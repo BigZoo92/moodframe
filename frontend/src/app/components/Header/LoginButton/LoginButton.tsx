@@ -1,9 +1,9 @@
 import React from 'react';
 import './style.scss'
-import { useFrontContext } from '@/app/contexts/FrontContext';
+import { useStore } from '@/app/store';
 
 const LoginButton = () => {
-  const { setIsAuthActive } = useFrontContext()
+  const { setIsAuthActive } = useStore()
   
     const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
       event.stopPropagation();

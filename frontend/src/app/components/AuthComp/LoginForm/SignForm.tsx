@@ -1,6 +1,7 @@
 import { signup } from '@/app/utils';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { SignupSchemaReturnType } from '../../../types';
 export interface AuthFormData {
   username: string;
   email: string;
@@ -20,7 +21,7 @@ const SignForm = () => {
 
   const onSubmit = async (data: AuthFormData) => {
     try {
-      const response = await signup(data);
+      const response: SignupSchemaReturnType = await signup(data);
       console.log(response)
     } catch (error) {
       console.error("Erreur lors de l'inscription:", error);
@@ -29,7 +30,6 @@ const SignForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {/* Vos champs de formulaire ici */}
       <div>
         <input
           type='text'

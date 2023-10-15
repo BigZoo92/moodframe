@@ -2,26 +2,28 @@ import { Request, Response } from 'express';
 import { hashPassword } from '../password';
 import { searchUserByUsernameOrEmail } from '../search';
 import { PrismaClient } from '@prisma/client';
+import { SignupSchema, SignupSchemaType } from '../../types';
 
 const prisma = new PrismaClient();
 
-interface SignupRequestBody {
-  username: string;
-  email: string;
-  password: string;
-}
-
 export const signup = async (
-  req: Request<{}, {}, SignupRequestBody>,
+  req: Request<{}, {}, SignupSchemaType>,
   res: Response
 ) => {
-  const { username, email, password } = req.body;
+  const { username, email, password }: SignupSchemaType = req.body;
 
   try {
+    // Valider les données avec Zod
+    SignupSchema.parse({
+      username,
+      email,
+      password,
+    });
+
     const existingUser = await searchUserByUsernameOrEmail(username, email);
 
     if (existingUser) {
-      return res.status(409).json({ userExist: true });
+      return res.status(409).json({ user: existingUser, userExist: true });
     }
 
     const hashedPassword = await hashPassword(password);
@@ -33,9 +35,11 @@ export const signup = async (
       },
     });
 
-    res.status(201).json({ newUser, userExist: false });
-  } catch (error) {
-    console.error("Erreur lors de l'inscription :", error);
-    res.status(500).end();
+    res.status(201).json({ user: newUser, userExist: false });
+  } catch (error: any) {
+    console.error("Erreur lors de l'inscription :", error.errors);
+    res
+      .status(400)
+      .json({ message: 'Validation failed', errors: error.errors });
   }
 };
