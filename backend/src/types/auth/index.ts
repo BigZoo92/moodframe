@@ -1,1 +1,1 @@
-export * from './signupTypes'
+export * from './auth'

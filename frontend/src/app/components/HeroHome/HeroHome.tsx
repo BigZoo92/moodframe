@@ -3,7 +3,7 @@ import './style.scss';
 import Button from '../Button/Button';
 import Eyes from '../Eyes/Eyes';
 import CircularText from '../CircularText/CircularText';
-import AuthComp from '../AuthComp/AuthComp';
+import {AuthComp} from '../AuthComp/AuthComp';
 
 const HeroHome = () => {
     

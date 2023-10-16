@@ -3,10 +3,10 @@
 import React, { CSSProperties, useEffect, useRef } from 'react';
 import './style.scss';
 import { useStore } from '@/app/store';
-import LoginForm from './LoginForm/LoginForm';
-import SignForm from './LoginForm/SignForm';
+import {LoginForm} from './Forms';
+import {SignForm} from './Forms';
 
-const AuthComp = () => {
+export const AuthComp = () => {
 
   const { isAuthActive, setIsAuthActive, isLoginActive, setIsLoginActive, isUserExists, setIsUserExists  } = useStore();
 
@@ -81,4 +81,3 @@ const AuthComp = () => {
   )
 };
 
-export default AuthComp;

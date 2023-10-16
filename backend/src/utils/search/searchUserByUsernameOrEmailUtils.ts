@@ -1,18 +1,25 @@
 import { PrismaClient } from '@prisma/client';
+import { AuthSchemaType } from '../../types';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ['info', 'warn'],
+});
 
-export async function searchUserByUsernameOrEmail(
-  username: string,
-  email: string
-): Promise<any | null> {
+export const searchUserByUsernameOrEmail = async (
+  usernameOrEmail: string
+): Promise<AuthSchemaType | null> => {
   try {
-    const user = await prisma.user.findFirst({
-      where: {
-        OR: [{ username: { equals: username } }, { email: { equals: email } }],
-      },
-    });
-    return user || null;
+    if (usernameOrEmail.includes('@')) {
+      const user = await prisma.user.findFirst({
+        where: { email: { equals: usernameOrEmail } },
+      });
+      return user;
+    } else {
+      const user = await prisma.user.findFirst({
+        where: { username: { equals: usernameOrEmail } },
+      });
+      return user;
+    }
   } catch (error) {
     console.error(
       "Erreur lors de la recherche d'utilisateur existant :",
@@ -20,4 +27,4 @@ export async function searchUserByUsernameOrEmail(
     );
     throw error;
   }
-}
+};

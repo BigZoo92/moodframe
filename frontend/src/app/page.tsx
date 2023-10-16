@@ -1,4 +1,4 @@
-import HeroHome from "./components/HeroHome.tsx/HeroHome";
+import HeroHome from "./components/HeroHome";
 
 export default function Home() {
   return (

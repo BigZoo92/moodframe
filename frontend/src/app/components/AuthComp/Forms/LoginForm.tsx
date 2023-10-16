@@ -1,14 +1,16 @@
 import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import './style.scss';
 import { useStore } from '@/app/store';
+import { SignupSchemaReturnType } from '@/app/types';
+import { authFetch, SignupOrLogin } from '@/app/utils';
 
-interface AuthFormData {
+export interface AuthFormDataWithoutUsername {
   usernameOrEmail: string;
   password: string;
 }
 
-const LoginForm = () => {
+export const LoginForm = () => {
 
   const { userName  } = useStore();
 
@@ -16,11 +18,16 @@ const LoginForm = () => {
   register,
   handleSubmit,
   formState: { errors },
-} = useForm<AuthFormData>();
+} = useForm<AuthFormDataWithoutUsername>();
 
-const onSubmit: SubmitHandler<AuthFormData> = (data) => {
-  console.log(data); 
-};
+const onSubmit = async (data: AuthFormDataWithoutUsername) => {
+    try {
+      const response: SignupSchemaReturnType = await authFetch(data, SignupOrLogin.Signup);
+      console.log(response)
+    } catch (error) {
+      console.error("Erreur lors de l'inscription:", error);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -52,4 +59,3 @@ const onSubmit: SubmitHandler<AuthFormData> = (data) => {
   )
 };
 
-export default LoginForm;

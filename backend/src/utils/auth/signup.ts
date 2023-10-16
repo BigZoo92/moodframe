@@ -2,25 +2,23 @@ import { Request, Response } from 'express';
 import { hashPassword } from '../password';
 import { searchUserByUsernameOrEmail } from '../search';
 import { PrismaClient } from '@prisma/client';
-import { SignupSchema, SignupSchemaType } from '../../types';
+import { AuthSchema, AuthSchemaType } from '../../types';
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient({
+  log: ['info', 'warn']
+});
 
-export const signup = async (
-  req: Request<{}, {}, SignupSchemaType>,
-  res: Response
-) => {
-  const { username, email, password }: SignupSchemaType = req.body;
+export const signup = async (req: Request<{}, {}, AuthSchemaType>, res: Response) => {
+  const { username, email, password }: AuthSchemaType = req.body;
 
   try {
-    // Valider les données avec Zod
-    SignupSchema.parse({
+    AuthSchema.parse({
       username,
       email,
       password,
     });
 
-    const existingUser = await searchUserByUsernameOrEmail(username, email);
+    const existingUser = await searchUserByUsernameOrEmail(email);
 
     if (existingUser) {
       return res.status(409).json({ user: existingUser, userExist: true });

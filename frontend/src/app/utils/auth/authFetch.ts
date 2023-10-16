@@ -1,14 +1,22 @@
-import { AuthFormData } from '@/app/components/AuthComp/LoginForm/SignForm';
+import {
+  AuthFormData,
+  AuthFormDataWithoutUsername,
+} from '@/app/components/AuthComp/Forms';
 import { SignupSchema, SignupSchemaReturnType } from '../../types';
 
-export const signup = async (
-  data: AuthFormData
+export enum SignupOrLogin {
+  Signup = 'signup',
+  Login = 'Login',
+}
+
+export const authFetch = async (
+  data: AuthFormData | AuthFormDataWithoutUsername,
+  urlToFetch: SignupOrLogin
 ): Promise<SignupSchemaReturnType> => {
   try {
-    // Valider les données avec Zod
     SignupSchema.parse(data);
-
-    const response = await fetch('http://localhost:4000/api/auth/signup', {
+    const url = `http://localhost:4000/api/auth/${urlToFetch}`;
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
