@@ -1,1 +1,1 @@
-export * as AuthComp from './AuthComp'
+export * from './AuthComp'

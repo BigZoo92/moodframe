@@ -1,53 +1,45 @@
 import express from 'express';
+import session from 'express-session';
+import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 import cors from 'cors';
-import { ApolloServer } from 'apollo-server-express';
-import schema from '../graphql/schema';
+import dotenv from 'dotenv';
+import router from './routes/routes';
+import { corsOptions, port, secret } from './constant';
+import { AuthSchemaType } from './types';
 
+declare module 'express-session' {
+  interface Session {
+    user: AuthSchemaType
+  }
+}
+
+// INIT
+dotenv.config();
 const app = express();
-const port = process.env.PORT || 4000;
+app.use(express.json());
 
-// Liste des origines autorisées pour les requêtes CORS
-const whitelist = ['http://localhost:3000'];
-
-// Configuration CORS
-const corsOptions: cors.CorsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || whitelist.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
+// MIDDLEWARE
+app.use(helmet());
+app.use(cookieParser());
 app.use(cors(corsOptions));
 
-//Affichage page
-app.get('/', (req, res) => {
-  res.send('Hello, World !');
-});
-app.get('/', (req, res) => {
-  res.send('Hello, GraphQl !');
-});
+// SESSION
+app.use(session({
+  secret: secret,
+  resave: false,
+  saveUninitialized: false,
+}));
 
-// Configuration du serveur Apollo GraphQL
-const server = new ApolloServer({
-  schema,
-  context: ({ req, res }) => ({ req, res }),
+// BACKEND'S HOME
+app.get('/', (_, res) => {
+  res.send('Hello, World!');
 });
 
-// Démarrage du serveur
-const startServer = async () => {
-  await server.start();
-  server.applyMiddleware({
-    app,
-    path: '/graphql',
-    cors: false, 
-  });
+// ROUTES
+app.use('/api', router);
 
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-};
-
-startServer();
+// START THE SERVER
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
