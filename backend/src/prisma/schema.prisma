@@ -7,9 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum StatusUser {
+  Unconfirmed
+  WithoutPlan
+  Student
+  Essential
+  Advanced
+}
+
 model User {
   id       Int       @id @default(autoincrement())
   username String    @unique
   email    String    @unique
   password String
+  status   StatusUser    
 }
+

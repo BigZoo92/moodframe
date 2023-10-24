@@ -1,8 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import './style.scss';
+import { useRouter } from 'next/navigation'
+
 import { useStore } from '@/app/store';
-import { SignupSchemaReturnType } from '@/app/types';
+import { AuthSchemaReturnType } from '@/app/types';
 import { authFetch, SignupOrLogin } from '@/app/utils';
 
 export interface AuthFormDataWithoutUsername {
@@ -12,7 +14,8 @@ export interface AuthFormDataWithoutUsername {
 
 export const LoginForm = () => {
 
-  const { userName  } = useStore();
+  const { userName, setUser  } = useStore();
+  const router = useRouter()
 
   const {
   register,
@@ -22,10 +25,14 @@ export const LoginForm = () => {
 
 const onSubmit = async (data: AuthFormDataWithoutUsername) => {
     try {
-      const response: SignupSchemaReturnType = await authFetch(data, SignupOrLogin.Signup);
+      const response: AuthSchemaReturnType = await authFetch(data, SignupOrLogin.Login);
+      if(response.userExist){
+        setUser(response.user)
+        router.push('/dashboard')
+      }
       console.log(response)
     } catch (error) {
-      console.error("Erreur lors de l'inscription:", error);
+      console.error("Erreur lors de l'inscription 5:", error);
     }
   };
 
@@ -37,7 +44,7 @@ const onSubmit = async (data: AuthFormDataWithoutUsername) => {
           id='usernameOrEmail'
           {...register('usernameOrEmail', { required: 'Username or email is required' })}
           placeholder = 'Username or Email'
-          value={userName}
+          defaultValue={userName}
         />
         {errors.usernameOrEmail && <span>{errors.usernameOrEmail.message}</span>}
       </div>

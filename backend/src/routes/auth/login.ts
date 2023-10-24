@@ -1,20 +1,19 @@
 import { Request, Response } from 'express';
-import { comparePasswords } from '../password'; // Assurez-vous d'avoir une fonction de comparaison de mot de passe
-import { searchUserByUsernameOrEmail } from '../search';
-import { AuthSchema, AuthSchemaType } from '../../types';
+import { comparePasswords } from '../../utils/password'; 
+import { searchUserByUsernameOrEmail } from '../../utils/search';
+import { LoginSchema, LoginSchemaType } from '../../types';
 
 
-export const signin = async (req: Request<{}, {}, AuthSchemaType>, res: Response) => {
-  const { username, email, password }: AuthSchemaType = req.body;
+export const login = async (req: Request<{}, {}, LoginSchemaType>, res: Response) => {
+  const { usernameOrEmail, password }: LoginSchemaType = req.body;
 
   try {
-    AuthSchema.parse({
-      username,
-      email,
+    LoginSchema.parse({
+      usernameOrEmail,
       password,
     });
-
-    const user = await searchUserByUsernameOrEmail(email);
+    console.log(req.body);
+    const user = await searchUserByUsernameOrEmail(usernameOrEmail);
 
     if (!user) {
       return res.status(401).json({ user: null, userExist: false });

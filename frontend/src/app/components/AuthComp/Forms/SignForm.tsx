@@ -1,7 +1,7 @@
 import { SignupOrLogin, authFetch } from '@/app/utils';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { SignupSchemaReturnType } from '../../../types';
+import { AuthSchemaReturnType } from '../../../types';
 
 export interface AuthFormData {
   username: string;
@@ -22,10 +22,10 @@ export const SignForm = () => {
 
   const onSubmit = async (data: AuthFormData) => {
     try {
-      const response: SignupSchemaReturnType = await authFetch(data, SignupOrLogin.Signup);
+      const response: AuthSchemaReturnType = await authFetch(data, SignupOrLogin.Signup);
       console.log(response)
     } catch (error) {
-      console.error("Erreur lors de l'inscription:", error);
+      console.error("Erreur lors de l'inscription 4:", error);
     }
   };
 
