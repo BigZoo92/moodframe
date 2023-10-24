@@ -21,7 +21,7 @@ app.use(express.json());
 
 // MIDDLEWARE
 app.use(helmet());
-app.use(cookieParser());
+app.use(cookieParser(secret));
 app.use(cors(corsOptions));
 
 // SESSION

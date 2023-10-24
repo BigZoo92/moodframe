@@ -1,0 +1,42 @@
+import nodemailer from 'nodemailer';
+import jwt from 'jsonwebtoken';
+import { jwtToken } from '../../constant';
+import fs from 'fs';
+import path from 'path'; 
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true, // use SSL
+  auth: {
+    user: `${process.env.MAIL}`,
+    pass: `${process.env.MDP_SECRET}`,
+  },
+});
+
+export const senConfirmSignupMail = async (email: string) => {
+  const emailToken = jwt.sign({ email }, jwtToken, {
+    expiresIn: '1d',
+  });
+
+  const emailConfirmationLink = `http://localhost:4000/api/auth/confirmSignup?token=${emailToken}`;
+
+  const htmlTemplatePath = path.resolve(
+    __dirname,
+    '../../templates/mail/mail.html'
+  );
+
+  const htmlTemplate = fs.readFileSync(htmlTemplatePath, 'utf8');
+    
+  const emailHTML = htmlTemplate.replace(
+    '{{confirmationLink}}',
+    emailConfirmationLink
+  );
+
+  await transporter.sendMail({
+    from: `${process.env.MAIL}`,
+    to: email,
+    subject: "Confirmation d'inscription",
+    html: emailHTML,
+  });
+};

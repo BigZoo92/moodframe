@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { AuthSchemaType } from '../types';
 
 interface Store {
   isAuthActive: boolean;
@@ -9,7 +10,10 @@ interface Store {
   setIsUserExists: (value: boolean) => void;
   userName: string;
   setUserName: (value: string) => void;
+  user: AuthSchemaType | null;
+  setUser: (user: AuthSchemaType | null) => void;
 }
+
 
 export const useStore = create<Store>((set) => ({
   isAuthActive: false,
@@ -20,4 +24,6 @@ export const useStore = create<Store>((set) => ({
   setIsUserExists: (value) => set({ isUserExists: value }),
   userName: '',
   setUserName: (value) => set({ userName: value }),
+  user: null,
+  setUser: (user) => set({user: user}),
 }));

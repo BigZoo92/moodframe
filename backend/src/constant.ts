@@ -18,3 +18,5 @@ export const corsOptions: CorsOptions = {
 export const port = process.env.PORT || 4000;
 
 export const secret = process.env.SESSION_SECRET || 'session_secret_not_found';
+
+export const jwtToken = process.env.JWT_SECRET || 'jwt_secret_not_found';

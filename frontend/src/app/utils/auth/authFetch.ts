@@ -2,7 +2,7 @@ import {
   AuthFormData,
   AuthFormDataWithoutUsername,
 } from '@/app/components/AuthComp/Forms';
-import { SignupSchema, SignupSchemaReturnType } from '../../types';
+import { SignupSchema, AuthSchemaReturnType, LoginSchema } from '../../types';
 
 export enum SignupOrLogin {
   Signup = 'signup',
@@ -12,9 +12,11 @@ export enum SignupOrLogin {
 export const authFetch = async (
   data: AuthFormData | AuthFormDataWithoutUsername,
   urlToFetch: SignupOrLogin
-): Promise<SignupSchemaReturnType> => {
+): Promise<AuthSchemaReturnType> => {
   try {
-    SignupSchema.parse(data);
+    urlToFetch === SignupOrLogin.Signup
+      ? SignupSchema.parse(data)
+      : LoginSchema.parse(data);
     const url = `http://localhost:4000/api/auth/${urlToFetch}`;
     const response = await fetch(url, {
       method: 'POST',
@@ -23,24 +25,21 @@ export const authFetch = async (
       },
       body: JSON.stringify(data),
     });
-
+    console.log(response)
     if (response.ok) {
-      const result: SignupSchemaReturnType = await response.json();
-
+      const result: AuthSchemaReturnType = await response.json();
       if (result.userExist) {
-        console.log('Utilisateur existe déjà :', result.user);
-        return { user: null, userExist: true };
+        return { user: result.user, userExist: true };
       } else {
-        console.log('Utilisateur enregistré avec succès :', result.user);
         return { user: result.user, userExist: false };
-      }
+      } 
     } else {
       const errorData = await response.json();
-      console.error("Erreur lors de l'inscription :", errorData);
+      console.error("Erreur lors de l'inscription 1 :", errorData);
       return { user: null, userExist: false };
     }
   } catch (error) {
-    console.error("Erreur lors de l'inscription :", error);
+    console.error("Erreur lors de l'inscription 2 :", error);
     return { user: null, userExist: false };
   }
 };
