@@ -6,9 +6,7 @@ import {
   SignupSchema,
   SignupSchemaType,
 } from '../../../types';
-import { senConfirmSignupMail } from '../../../utils';
-
-
+import { sendConfirmSignupMail } from '../../../utils';
 
 const prisma = new PrismaClient({
   log: ['info', 'warn']
@@ -44,7 +42,7 @@ export const signup = async (
     });
 
     try {
-      await senConfirmSignupMail(email)
+      await sendConfirmSignupMail(email)
     } catch (error) {
       console.error(
         "Erreur lors de l'envoi de l'e-mail de confirmation :",

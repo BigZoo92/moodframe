@@ -9,7 +9,6 @@ interface ButtonProps {
 }
 
 const Button = ({ text, href, negatif }: ButtonProps) => {
-    console.log(negatif)
   return (
     <Link href={href} className={negatif ? 'retro_button negatif' : 'retro_button'}>
         {text}    

@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/BigZoo92/moodframe#readme",
   "dependencies": {
+    "passport": "^0.6.0",
     "zod": "^3.22.4"
   }
 }
