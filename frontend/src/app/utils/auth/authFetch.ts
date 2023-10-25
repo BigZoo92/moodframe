@@ -20,12 +20,12 @@ export const authFetch = async (
     const url = `http://localhost:4000/api/auth/${urlToFetch}`;
     const response = await fetch(url, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(data),
     });
-    console.log(response)
     if (response.ok) {
       const result: AuthSchemaReturnType = await response.json();
       if (result.userExist) {

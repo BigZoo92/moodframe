@@ -12,7 +12,6 @@ export const login = async (req: Request<{}, {}, LoginSchemaType>, res: Response
       usernameOrEmail,
       password,
     });
-    console.log(req.body);
     const user = await searchUserByUsernameOrEmail(usernameOrEmail);
 
     if (!user) {
@@ -24,8 +23,9 @@ export const login = async (req: Request<{}, {}, LoginSchemaType>, res: Response
     if (!isPasswordValid) {
       return res.status(401).json({ user: user, userExist: false });
     }
+    
     req.session.user = user;
-    res.status(200).json({ user: user, userExist: true });
+    res.status(200).json({ user: req.session.user, userExist: true });
   } catch (error: any) {
     console.error("Erreur lors de l'authentification :", error.errors);
     res

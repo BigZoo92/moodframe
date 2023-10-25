@@ -7,14 +7,14 @@ import path from 'path';
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 465,
-  secure: true, // use SSL
+  secure: true, 
   auth: {
     user: `${process.env.MAIL}`,
     pass: `${process.env.MDP_SECRET}`,
   },
 });
 
-export const senConfirmSignupMail = async (email: string) => {
+export const sendConfirmSignupMail = async (email: string) => {
   const emailToken = jwt.sign({ email }, jwtToken, {
     expiresIn: '1d',
   });
@@ -23,7 +23,7 @@ export const senConfirmSignupMail = async (email: string) => {
 
   const htmlTemplatePath = path.resolve(
     __dirname,
-    '../../templates/mail/mail.html'
+    '../../templates/mail/confirmSignup.html'
   );
 
   const htmlTemplate = fs.readFileSync(htmlTemplatePath, 'utf8');
@@ -40,3 +40,32 @@ export const senConfirmSignupMail = async (email: string) => {
     html: emailHTML,
   });
 };
+
+export const sendResetPassword = async (email: string) => {
+  const emailToken = jwt.sign({ email }, jwtToken, {
+    expiresIn: '1d',
+  });
+
+  const emailResetPasswordLink = `http://localhost:4000/api/auth/resetPassword?token=${emailToken}`;
+
+  const htmlTemplatePath = path.resolve(
+    __dirname,
+    '../../templates/mail/resetPassword.html'
+  );
+
+  const htmlTemplate = fs.readFileSync(htmlTemplatePath, 'utf8');
+
+  const emailHTML = htmlTemplate.replace(
+    '{{ResetPasswordLink}}',
+    emailResetPasswordLink
+  );
+
+  await transporter.sendMail({
+    from: `${process.env.MAIL}`,
+    to: email,
+    subject: "Confirmation d'inscription",
+    html: emailHTML,
+  });
+};
+
+
